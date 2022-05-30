@@ -24,16 +24,21 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.asLiveData
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.wordsapp.data.SettingsDataStore
 import com.example.wordsapp.databinding.FragmentLetterListBinding
+import kotlinx.coroutines.launch
 
 /**
  * Entry fragment for the app. Displays a [RecyclerView] of letters.
  */
 class LetterListFragment : Fragment() {
     private var _binding: FragmentLetterListBinding? = null
+    private lateinit var SettingsDataStore: SettingsDataStore
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -60,9 +65,14 @@ class LetterListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         recyclerView = binding.recyclerView
-        // Sets the LayoutManager of the recyclerview
-        // On the first run of the app, it will be LinearLayoutManager
-        chooseLayout()
+        // Initialize SettingsDataStore
+        SettingsDataStore = SettingsDataStore(requireContext())
+        SettingsDataStore.preferenceFlow.asLiveData().observe(viewLifecycleOwner) { value ->
+            isLinearLayoutManager = value
+            chooseLayout()
+            // Redraw the menu
+            activity?.invalidateOptionsMenu()
+        }
     }
 
     /**
@@ -116,6 +126,11 @@ class LetterListFragment : Fragment() {
                 // Sets layout and icon
                 chooseLayout()
                 setIcon(item)
+
+                // Launch a coroutine and write the layout setting in the preference Datastore
+                lifecycleScope.launch {
+                    SettingsDataStore.saveLayoutToPreferencesStore(isLinearLayoutManager, requireContext())
+                }
 
                 return true
             }
