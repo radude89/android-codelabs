@@ -20,9 +20,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import androidx.slidingpanelayout.widget.SlidingPaneLayout
 import com.example.android.sports.databinding.FragmentSportsListBinding
 
 /**
@@ -42,18 +44,58 @@ class SportsListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val binding = FragmentSportsListBinding.bind(view)
 
-        // Initialize the adapter and set it to the RecyclerView.
+        val binding = FragmentSportsListBinding.bind(view)
+        setupSlidingPaneLayout(binding)
+        setupAdapter(binding)
+    }
+
+    private fun setupSlidingPaneLayout(binding: FragmentSportsListBinding) {
+        val slidingPaneLayout = binding.slidingPaneLayout
+        slidingPaneLayout.lockMode = SlidingPaneLayout.LOCK_MODE_LOCKED
+        setupSlidingPaneBackCallback(slidingPaneLayout)
+    }
+
+    private fun setupSlidingPaneBackCallback(slidingPaneLayout: SlidingPaneLayout) {
+        requireActivity().onBackPressedDispatcher.addCallback(
+            viewLifecycleOwner,
+            SportsListOnBackPressedCallback(slidingPaneLayout)
+        )
+    }
+
+    private fun setupAdapter(binding: FragmentSportsListBinding) {
         val adapter = SportsAdapter {
-            // Update the user selected sport as the current sport in the shared viewmodel
-            // This will automatically update the dual pane content
             sportsViewModel.updateCurrentSport(it)
-            // Navigate to the details screen
-            val action = SportsListFragmentDirections.actionSportsListFragmentToNewsFragment()
-            this.findNavController().navigate(action)
+            binding.slidingPaneLayout.openPane()
         }
         binding.recyclerView.adapter = adapter
         adapter.submitList(sportsViewModel.sportsData)
     }
+
+}
+
+class SportsListOnBackPressedCallback(
+    private val slidingPaneLayout: SlidingPaneLayout
+) : OnBackPressedCallback(slidingPaneLayout.isSlideable && slidingPaneLayout.isOpen),
+    SlidingPaneLayout.PanelSlideListener {
+
+    init {
+        slidingPaneLayout.addPanelSlideListener(this)
+    }
+
+    override fun handleOnBackPressed() {
+        slidingPaneLayout.closePane()
+    }
+
+    override fun onPanelSlide(panel: View, slideOffset: Float) {
+    }
+
+    override fun onPanelOpened(panel: View) {
+        isEnabled = true
+    }
+
+    override fun onPanelClosed(panel: View) {
+        isEnabled = false
+    }
+
 }
