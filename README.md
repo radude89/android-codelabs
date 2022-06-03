@@ -1,6 +1,6 @@
 # android-codelabs
 
-This repo contains the codelabs of "Android Basics in Kotlin" course from developer.android.com.
+This repo contains the codelabs of "Android Basics in Kotlin" course from developer.android.com.  
 _Source: https://developer.android.com/courses/android-basics-kotlin/course_
 
 # Table of Contents
@@ -11,6 +11,7 @@ _Source: https://developer.android.com/courses/android-basics-kotlin/course_
   * [Basic](#basic)
   * [Testing](#testing)
   * [Layouts](#layouts)
+  * [Pixel densities](#pixel-densities)
   * [Activities](#activities)
   * [Logging](#logging)
 * [Unit 2 - Layouts](#unit2-layouts)
@@ -77,6 +78,24 @@ println("Hello world")
 
 The **package name** is the name used by the Android system to **uniquely identify** your app. Usually, this defaults to the name of your organization followed by the name of the app. E.g.: _com.companyname.yourapp_.
 
+
+* `when` statement is used to replace `if` - `else if` statements. Is similar with `switch` in other languages. Example [here](https://play.kotlinlang.org/byExample/02_control_flow/01_When).
+
+```
+when (rollResult) {
+    luckyNumber -> println("You won!")
+    1 -> println("So sorry! You rolled a 1. Try again!")
+    2 -> println("Sadly, you rolled a 2. Try again!")
+    3 -> println("Unfortunately, you rolled a 3. Try again!")
+    5 -> println("Don't cry! You rolled a 5. Try again!")
+    6 -> println("Apologies! You rolled a 6. Try again!")
+    else -> { // do something }
+}
+```
+
+**What is a program?**   
+A series of instructions that a computer system executes to accomplish some action
+
 ### Testing
 
 Testing theory [notes can be found here](https://developer.android.com/codelabs/android-basics-kotlin-testing-basics?continue=https%3A%2F%2Fdeveloper.android.com%2Fcourses%2Fpathways%2Fandroid-basics-kotlin-two%23codelab-https%3A%2F%2Fdeveloper.android.com%2Fcodelabs%2Fandroid-basics-kotlin-testing-basics#1) and [here](https://developer.android.com/codelabs/android-basics-kotlin-write-unit-tests?continue=https%3A%2F%2Fdeveloper.android.com%2Fcourses%2Fpathways%2Fandroid-basics-kotlin-four%23codelab-https%3A%2F%2Fdeveloper.android.com%2Fcodelabs%2Fandroid-basics-kotlin-write-unit-tests#1).
@@ -95,7 +114,7 @@ Key terms to know when referring to testing code:
 * **Test Case** - a class consisting of individual tests for related functionality.
 * **Test** - a function that tests one specific thing.
 
-Tests should not supposed to contain logic, no `if`-s or `when`-s. They should not manipulate values or conduct real computations.
+Tests should not suppose to contain logic, no `if`-s or `when`-s. They should not manipulate values or conduct real computations.
 
 ### Layouts
 
@@ -105,6 +124,15 @@ In Android, a graphic that can be drawn to the screen is generally referred to a
 
 **Classes** are like a blueprint of an object. They can have properties and behaviors, implemented as variables and functions.
 **An instance of a class** represents an object, often a physical object, such as a dice. You can call the actions on the object and change its attributes.
+
+### Pixel densities
+
+* **sp** - scalable pixels, a unit of measure of the font size.
+* **dp** - density-independent-pixels.
+By default, sp is the same size as dp, but it resizes based on the user's preferred text size.
+```
+px = dp * (dpi / 160)
+```
 
 ### Activities
 
@@ -193,6 +221,7 @@ myButton.text = "A button"
 // Best way with view binding and no extra variable
 binding.myButton.text = "A button"
 ```
+More to read [https://developer.android.com/topic/libraries/view-binding](here).
 
 ### Design
 
@@ -265,6 +294,37 @@ _Source: [Codelab "Write Instrumentation Tests"](https://developer.android.com/c
 * To display the items on screen, we use a `layoutManager`. E.g. `LinearLayoutManager`.
 * In the adapter, the `onCreateViewHolder()` method is used to create new view holders for the `RecyclerView` when there aren't any available to be reused.
 * The method `onBindViewHolder()` is called by the layout manager to replace the contents of a list item view.
+
+Example of adapter:
+```
+class ItemAdapter(
+    private val context: Context,
+    private val dataset: List<Affirmation>
+) : RecyclerView.Adapter<ItemAdapter.ItemViewHolder>() {
+
+    class ItemViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        val imageView: ImageView = view.findViewById(R.id.item_image)
+        val textView: TextView = view.findViewById(R.id.item_title)
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
+        val adapterLayout = LayoutInflater.from(parent.context)
+            .inflate(R.layout.list_item, parent, false)
+
+        return ItemViewHolder(adapterLayout)
+    }
+
+    override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
+        val item = dataset[position]
+        holder.textView.text = context.resources.getString(item.stringResourceId)
+        holder.imageView.setImageResource(item.imageResourceId)
+    }
+
+    override fun getItemCount(): Int {
+        return dataset.size
+    }
+}
+```
 
 ### Annotations
 
