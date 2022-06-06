@@ -92,6 +92,7 @@ when (rollResult) {
     else -> { // do something }
 }
 ```
+* Scope functions - https://kotlinlang.org/docs/scope-functions.html.
 
 **What is a program?**   
 A series of instructions that a computer system executes to accomplish some action
@@ -431,13 +432,30 @@ The fragment lifecycle has **five states**:
 4. **RESUMED** - fragment is visible and has focus.
 5. **DESTROYED** - the fragment has been de-instantiated.
 
+Like activities, there are methods that you can override for fragments:
+
+* `onCreate()`: The fragment has been instantiated and is in the **CREATED** state. However, its corresponding view has not been created yet.
+* `onCreateView()`: This method is where you inflate the layout. The fragment has entered the **CREATED** state.
+* `onViewCreated()`: This is called after the view is created. In this method, you would typically bind specific views to properties by calling `findViewById()`.
+* `onStart()`: The fragment has entered the **STARTED** state.
+* `onResume()`: The fragment has entered the **RESUMED** state and now has focus (can respond to user input).
+* `onPause()`: The fragment has re-entered the **STARTED** state. The UI is visible to the user
+* `onStop()`: The fragment has re-entered the **CREATED** state. The object is instantiated but is no longer presented on screen.
+* `onDestroyView()`: Called right before the fragment enters the **DESTROYED** state. The view has already been removed from memory, but the fragment object still exists.
+* `onDestroy()`: The fragment enters the **DESTROYED** state.
+
+_Source: [Android codelab Fragments and Navigation component](https://developer.android.com/codelabs/basic-android-kotlin-training-fragments-navigation-component?continue=https%3A%2F%2Fdeveloper.android.com%2Fcourses%2Fpathways%2Fandroid-basics-kotlin-unit-3-pathway-2%23codelab-https%3A%2F%2Fdeveloper.android.com%2Fcodelabs%2Fbasic-android-kotlin-training-fragments-navigation-component#2)._
+
 Fragments lifecycle diagram is presented below:
 
 <img src="images/fragments-lifecycle.png" width=50% />
 
 _Source: https://developer.android.com/codelabs/basic-android-kotlin-training-fragments-navigation-component/img/8dc30a4c12ab71b.png_
 
-* Key difference between fragments and activities lifecycle is the `onCreate()` method. With activities, you use this method to inflate the layout and bind views. However, in fragments the method is called before the view is created, so you can't inflate the layout here. Instead, you do this in `onCreateView()`. Then, after the view has been created, the `onViewCreated()` method is called, where you can bind properties to specific views.
+---
+**NOTE**
+* **Key difference between fragments and activities lifecycle is the `onCreate()` method. With activities, you use this method to inflate the layout and bind views. However, in fragments the method is called before the view is created, so you can't inflate the layout here. Instead, you do this in `onCreateView()`. Then, after the view has been created, the `onViewCreated()` method is called, where you can bind properties to specific views.**
+---
 
 * Fragments and activity lifecycle diagram:
 
@@ -476,6 +494,14 @@ plugins {
     app:defaultNavHost="true"
     app:navGraph="@navigation/nav_graph"/>
 ```
+
+* Adding support for the back button (up button):
+```
+override fun onSupportNavigateUp(): Boolean {
+    return navController.navigateUp() || super.onSupportNavigateUp()
+}
+```
+
 
 ### App architecture
 

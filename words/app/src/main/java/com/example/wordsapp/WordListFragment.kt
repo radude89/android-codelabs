@@ -25,7 +25,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.wordsapp.databinding.FragmentWordListBinding
 
 /**
- * Displays a [RecyclerView] of words with search buttons to look them up.
+ * Displays a `RecyclerView` of words with search buttons to look them up.
  */
 class WordListFragment : Fragment() {
 
@@ -35,8 +35,8 @@ class WordListFragment : Fragment() {
      * a DetailListFragment instance.
      */
     companion object {
-        val LETTER = "letter"
-        val SEARCH_PREFIX = "https://www.google.com/search?q="
+        const val LETTER = "letter"
+        const val SEARCH_PREFIX = "https://www.google.com/search?q="
     }
 
     private var _binding: FragmentWordListBinding? = null
@@ -60,16 +60,18 @@ class WordListFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Retrieve and inflate the layout for this fragment
-        _binding = FragmentWordListBinding.inflate(inflater, container, false)
+        _binding = FragmentWordListBinding
+            .inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        val context = requireContext()
         val recyclerView = binding.recyclerView
-        recyclerView.layoutManager = LinearLayoutManager(requireContext())
-        recyclerView.adapter = WordAdapter(letterId, requireContext())
+        recyclerView.layoutManager = LinearLayoutManager(context)
+        recyclerView.adapter = WordAdapter(letterId, context)
 
         // Adds a [DividerItemDecoration] between items
         recyclerView.addItemDecoration(

@@ -38,7 +38,7 @@ import kotlinx.coroutines.launch
  */
 class LetterListFragment : Fragment() {
     private var _binding: FragmentLetterListBinding? = null
-    private lateinit var SettingsDataStore: SettingsDataStore
+    private lateinit var settingsDataStore: SettingsDataStore
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -57,17 +57,18 @@ class LetterListFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Retrieve and inflate the layout for this fragment
-        _binding = FragmentLetterListBinding.inflate(inflater, container, false)
+        _binding = FragmentLetterListBinding
+            .inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         recyclerView = binding.recyclerView
         // Initialize SettingsDataStore
-        SettingsDataStore = SettingsDataStore(requireContext())
-        SettingsDataStore.preferenceFlow.asLiveData().observe(viewLifecycleOwner) { value ->
+        settingsDataStore = SettingsDataStore(requireContext())
+        settingsDataStore.preferenceFlow.asLiveData().observe(viewLifecycleOwner) { value ->
             isLinearLayoutManager = value
             chooseLayout()
             // Redraw the menu
@@ -129,7 +130,7 @@ class LetterListFragment : Fragment() {
 
                 // Launch a coroutine and write the layout setting in the preference Datastore
                 lifecycleScope.launch {
-                    SettingsDataStore.saveLayoutToPreferencesStore(isLinearLayoutManager, requireContext())
+                    settingsDataStore.saveLayoutToPreferencesStore(isLinearLayoutManager, requireContext())
                 }
 
                 return true
