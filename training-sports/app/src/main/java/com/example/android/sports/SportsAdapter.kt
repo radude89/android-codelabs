@@ -67,8 +67,7 @@ class SportsAdapter(private val onItemClicked: (Sport) -> Unit) :
             override fun areItemsTheSame(oldItem: Sport, newItem: Sport): Boolean {
                 return (oldItem.id == newItem.id ||
                         oldItem.titleResourceId == newItem.titleResourceId ||
-                        oldItem.subTitleResourceId == newItem.subTitleResourceId
-                        )
+                        oldItem.subTitleResourceId == newItem.subTitleResourceId)
             }
 
             override fun areContentsTheSame(oldItem: Sport, newItem: Sport): Boolean {

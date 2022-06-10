@@ -34,9 +34,11 @@ class PlantAdapter(private val longClickListener: PlantListener) :
             longClickListener: PlantListener,
             plant: Plant
         ) {
-            binding.plant = plant
-            binding.longClickListner = longClickListener
-            binding.executePendingBindings()
+            binding.apply {
+                this.plant = plant
+                this.longClickListner = longClickListener
+                executePendingBindings()
+            }
         }
     }
 

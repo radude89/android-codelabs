@@ -24,11 +24,11 @@ import com.example.android.sports.model.Sport
 
 class SportsViewModel : ViewModel() {
 
-    private var _currentSport: MutableLiveData<Sport> = MutableLiveData<Sport>()
+    private var _currentSport = MutableLiveData<Sport>()
     val currentSport: LiveData<Sport>
         get() = _currentSport
 
-    private var _sportsData: ArrayList<Sport> = ArrayList()
+    private var _sportsData = ArrayList<Sport>()
     val sportsData: ArrayList<Sport>
         get() = _sportsData
 

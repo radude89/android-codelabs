@@ -38,7 +38,7 @@ class SportsListFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         return FragmentSportsListBinding.inflate(inflater, container, false).root
     }
 
