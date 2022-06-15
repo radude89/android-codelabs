@@ -23,20 +23,20 @@ import kotlinx.coroutines.flow.Flow
  * Data Access Object for database interaction.
  */
 @Dao
-interface ForageableDao {
+abstract class ForageableDao {
 
     @Query("SELECT * FROM forageable_database")
-    fun getForageables(): Flow<List<Forageable>>
+    abstract  fun getForageables(): Flow<List<Forageable>>
 
     @Query("SELECT * FROM forageable_database WHERE id = :id")
-    fun getForageable(id: Long): Flow<Forageable>
+    abstract  fun getForageable(id: Long): Flow<Forageable>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insert(forageable: Forageable)
+    abstract suspend fun insert(forageable: Forageable)
 
     @Update
-    suspend fun update(forageable: Forageable)
+    abstract suspend fun update(forageable: Forageable)
 
     @Delete
-    suspend fun delete(forageable: Forageable)
+    abstract suspend fun delete(forageable: Forageable)
 }

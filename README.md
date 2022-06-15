@@ -60,7 +60,7 @@ This repo contains the codelabs of ["Android Basics in Kotlin" course](https://d
 * **TipTime** - themes and styles, adaptive app icons, instrumentation tests.
 * **DessertClicker** - activity life cycle.
 * **Cupcake** - navigation, multiple fragments, data binding
-* **Lunch Tray** - navigation, Android architecture, adaptive layouts.
+* **Lunch Tray** - navigation, Android architecture, adaptive layouts, example of tests.
 * **Words** - intents, fragments, RecyclerView, instrumentation tests for the nav controller, coroutines, Navigation component + tests.
 * **Unscramble** - LiveData, architecture components MVVM, data binding.
 * **Training Sports** - sliding pane layout, adaptive layouts.
