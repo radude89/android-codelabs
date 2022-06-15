@@ -61,7 +61,7 @@ This repo contains the codelabs of ["Android Basics in Kotlin" course](https://d
 * **DessertClicker** - activity life cycle.
 * **Cupcake** - navigation, multiple fragments, data binding
 * **Lunch Tray** - navigation, Android architecture, adaptive layouts, example of tests.
-* **Words** - intents, fragments, RecyclerView, instrumentation tests for the nav controller, coroutines, Navigation component + tests.
+* **Words** - intents, fragments, RecyclerView, instrumentation tests for the nav controller, coroutines, Navigation component + tests, preferencesDataStore.
 * **Unscramble** - LiveData, architecture components MVVM, data binding.
 * **Training Sports** - sliding pane layout, adaptive layouts.
 * **MarsPhoto** - basic example of fetching data from the Networking. Uses Moshi and Retrofit libraries. Other tags: view model binding, coroutines, binding adapters.
