@@ -55,24 +55,24 @@ This repo contains the codelabs of ["Android Basics in Kotlin" course](https://d
 * **demo** - when syntax in Kotlin. basic UT example.
 * **Debugging** - Logs.
 * **Lemonade** - save and load instance states, Snackbar.
-* **Affirmations** - RecyclerView basic example, instrumentation tests.
-* **Dogglers** - RecyclerView, different screen orientations.
+* **Affirmations** - RecyclerView basic example, list and adapter UT, instrumentation tests.
+* **Dogglers** - RecyclerView, different screen orientations, instrumentation tests.
 * **TipTime** - themes and styles, adaptive app icons, instrumentation tests.
-* **DessertClicker** - activity life cycle.
-* **Cupcake** - navigation, multiple fragments, data binding
-* **Lunch Tray** - navigation, Android architecture, adaptive layouts, example of tests.
-* **Words** - intents, fragments, RecyclerView, instrumentation tests for the nav controller, coroutines, Navigation component + tests, preferencesDataStore.
-* **Unscramble** - LiveData, architecture components MVVM, data binding.
-* **Training Sports** - sliding pane layout, adaptive layouts.
+* **DessertClicker** - activity life cycle, menu items.
+* **Cupcake** - navigation, multiple fragments, data binding, unit tests, themes and styles.
+* **Lunch Tray** - navigation, Android architecture, adaptive layouts, instrumentation tests.
+* **Words** - intents, fragments, RecyclerView, instrumentation tests for the nav controller, coroutines, Navigation component + tests, menu items.
+* **Unscramble** - LiveData, architecture components MVVM, data binding, MaterialAlertDialogBuilder, themes, styles.
+* **Training Sports** - sliding pane layout, adaptive layouts, AppBarConfiguration.
 * **MarsPhoto** - basic example of fetching data from the Networking. Uses Moshi and Retrofit libraries. Other tags: view model binding, coroutines, binding adapters.
 * **Amphibians** - Networking with Moshi and Retrofit, coroutines, shared view model, list adapters, binding adapters.
 * **sql-basics** - Room database, DAO.
 * **Bus scheduler** - Room database, DAO, coroutines, Flow, view models, view model factory, RecycleView, ListAdapter.
 * **Inventory** - Room database, DAO, coroutines, Flow, view models, view model factory, RecycleView, ListAdapter.
-* **Forage** - LiveData, coroutines, Room, DAO, view models view model factory, RecycleView, ListADapter.
-* **repository-pattern** - Retrofit, Moshi, Repository, Room, shared view model, coroutines. Good app to learn a lot of concepts.
-* **workmanager** - WorkManager, view model, view model factory, LiveData.
-* **WaterMe** - WorkManager, view model, view model factory, LiveData, ListAdapter.
+* **Forage** - LiveData, coroutines, Room, DAO, view models view model factory, RecycleView, ListADapter, instrumentation tests.
+* **repository-pattern** - Retrofit, Moshi, Repository, Room, shared view model, coroutines, binding adapters. Good app to learn a lot of concepts.
+* **workmanager** - WorkManager, view model, view model factory, LiveData, Notifications.
+* **WaterMe** - WorkManager, view model, view model factory, LiveData, ListAdapter, Notification tests.
 
 ## Useful links
 
